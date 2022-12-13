@@ -2,7 +2,7 @@
 
 namespace claseMain;
 
-use tipoCampo\Text;
+use \tipoCampo\Text;
 
 class Formulario
 {
@@ -10,16 +10,26 @@ class Formulario
     private $action;
     private $method;
     private $rutaGuardado;
-    private $campos;
+    private $campos = array();
 
     public const METHOD_POST = "post";
     public const METHOD_GET = "get";
 
-    public function __construct($action = ".", $method = "get", $rutaGuardado = "./bbdd.txt", $campos = []){
+    public function __construct($action = ".", $method = "get", $rutaGuardado = "./bbdd.txt", $campos = array()){
         $this->action = $action;
         $this->$method = $method;
         $this->$rutaGuardado = $rutaGuardado;
-        $this->$campos = $campos; //ARRAY CON LOS CAMPOS
+
+        // $varGlobal = ($this->method == self::METHOD_GET)? '$_POST' : '$_GET';
+        // foreach ($campos as $campo) {
+        //     $campo->getValue() = isset($varGlobal[$campo->getName()])? $varGlobal[$campo->getName()] : null;
+        //     array_push($this->$campos, );
+        // }
+        foreach ($campos as $campo) {
+            array_push($this->campos, $campo);
+        }
+        //array_push($this->campos, $campos[0]);
+        //$this->$campos = $campos; //ARRAY CON LOS CAMPOS
     }
 
     public function pintarGlobal(){
@@ -29,58 +39,34 @@ class Formulario
             $campo->pintar();
             echo "</div>";
         }
-        echo "<div><input type='submit' name='submit' value='Enviar' class='submit'></div>"
+        echo "<div><input type='submit' name='submit' value='Enviar' class='submit'></div>";
         echo "</form>";
+
+
+        //print_r($this->campos);
     }
 
-    public function validarGlobal(){
-        ($this->method == self::METHOD_GET)? $varGlobal = '$_POST' : $varGlobal = '$_GET';
+    // public function validarGuardar(){
+    //     if ($this->validarGlobal()) {
+    //         $this->guardar();
+    //     }
+    // }
 
+    public function validarGlobal() : bool
+    {
+        $varGlobal = ($this->method == self::METHOD_GET)? '$_POST' : '$_GET';
         $validado = true;
 
         if (isset($varGlobal['submit'])) {
             foreach ($this->campos as $campo) {
-                if (isset($varGlobal[$campo->getName()])) {
-                    
+                if (!$campo->validar()) {
+                    $validado = false; //si un solo campo no está validado, devuelvo FALSE
                 }
-                $campo->validarEspecifico();
             }
         }
+
+        return $validado;
     }
-
-    //guardado en BD
-    public function guardar(){
-
-        // Path to the "DB"
-        $file = $this->$rutaGuardado;
-
-        // Open the file to get existing content
-        $current = file_get_contents($file);
-
-        // Append a new series to the file
-        foreach ($post as $key => $value) {
-            //GUARDA TODOS LOS PARÁMETROS MENOS EL SUBMIT (botón submit)
-            if ($key != 'submit' ) {
-                //si no es checkbox (no es un array, recibe una opción)
-                if (!is_array($value)) {
-                    $current .= $value . ";";
-                //si es checkbox (es un array, recibe varias opciones)
-                } else {
-                    foreach ($post['generos'] as $genero) {
-                        $current .= $genero." ";
-                    }
-                    $current .= ";";
-                }
-            } 
-        }
-        $current .= "\n";
-
-        // Write the contents back to the file
-        file_put_contents($file, $current);
-
-    }
-
-
 
 }
 

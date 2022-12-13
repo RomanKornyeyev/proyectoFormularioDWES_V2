@@ -5,15 +5,17 @@ spl_autoload_register(function ($class) {
 
     $classPath = realpath("./");
     $file = str_replace('\\', '/', $class);
+    //echo "FILE: ".$file."<br>";
     $include = "$classPath/${file}.php";
+    //echo $include."<br>";
     require($include);
 
 });
 
-$formulario = new claseMain\Formulario("index.php", Formulario::METHOD_POST, "bbdd/bbdd.txt", [
-    //campo 1
-    //campo 2
-]);
+$formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD_POST, "bbdd/bbdd.txt", array(
+    $nombre = new tipoCampo\Text("", "nombre", tipoCampo\Text::DEFAULT_PATTERN),
+    $apellido = new tipoCampo\Text("", "apellido", tipoCampo\Text::DEFAULT_PATTERN)
+));
 
 ?>
 <!DOCTYPE html>
@@ -25,6 +27,6 @@ $formulario = new claseMain\Formulario("index.php", Formulario::METHOD_POST, "bb
     <title>Formulario V2</title>
 </head>
 <body>
-    
+    <?php $formulario->pintarGlobal(); ?>
 </body>
 </html>
