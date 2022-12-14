@@ -6,7 +6,7 @@ class Text extends Atipo
     private $patron;
     //constantes públicas para poder utilizarse fuera
     //letras mayus y minus, números, comas, puntos, exlamaciones e interrogaciones, guiones y barras bajas
-    public const DEFAULT_PATTERN = "/^[a-zA-Z0-9\s\,\.\¿\?\¡\!\_\-]{1,25}$/";
+    public const DEFAULT_PATTERN_25 = "/^[a-zA-Z0-9\s\,\.\¿\?\¡\!\_\-]{1,25}$/";
 
     public function __construct($valor, $name, $patron){
         parent::__construct($valor,$name);

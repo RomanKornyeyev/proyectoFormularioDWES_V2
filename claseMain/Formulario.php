@@ -33,14 +33,17 @@ class Formulario
     }
 
     public function pintarGlobal(){
+        //validamos para cargar la variable error y printearla
         $this->validarGlobal();
-        echo "<form action='$this->action' method='$this->method'>";
+
+        //printeo del formulario
+        echo "<form action='$this->action' method='$this->method' class='formulario'>";
         foreach ($this->campos as $campo) {
-            echo "<div>";
-            $campo->pintar();
+            echo "<div class='elemento'>";
+            $campo->pintar(); //output: <input>
             echo "</div>";
         }
-        echo "<div><input type='submit' name='submit' value='Enviar' class='submit'></div>";
+        echo "<div class='elemento'><input type='submit' name='submit' value='Enviar' class='submit'></div>";
         echo "</form>";
     }
 

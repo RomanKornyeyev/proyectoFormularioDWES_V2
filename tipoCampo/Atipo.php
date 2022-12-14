@@ -5,11 +5,13 @@ abstract class Atipo
 {    
     protected $valor; //valor del campo enviado
     protected $name; //name en HTML
+    protected $label;
     protected $error; //error personalizado por cada campo
 
-    public function __construct($valor = "", $name = "") {
+    public function __construct($valor = "", $name = "", $label = "") {
         $this->valor = $valor;
         $this->name = $name;
+        $this->label = $label;
     }
 
     public function getValor() { return $this->valor; }
