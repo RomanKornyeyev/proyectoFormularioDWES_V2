@@ -13,8 +13,8 @@ spl_autoload_register(function ($class) {
 });
 
 $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD_POST, "bbdd/bbdd.txt", array(
-    $nombre = new tipoCampo\Text("", "nombre", tipoCampo\Text::DEFAULT_PATTERN),
-    $apellido = new tipoCampo\Text("", "apellido", tipoCampo\Text::DEFAULT_PATTERN)
+    $nombre = new tipoCampo\Text(null, "nombre", tipoCampo\Text::DEFAULT_PATTERN),
+    $apellido = new tipoCampo\Text(null, "apellido", tipoCampo\Text::DEFAULT_PATTERN)
 ));
 
 ?>
@@ -27,6 +27,9 @@ $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD
     <title>Formulario V2</title>
 </head>
 <body>
-    <?php $formulario->pintarGlobal(); ?>
+    <?php
+        $formulario->pintarGlobal();
+        if ($formulario->validarGlobal()) echo "validao en index";
+    ?>
 </body>
 </html>

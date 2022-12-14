@@ -13,6 +13,7 @@ abstract class Atipo
     }
 
     public function getValor() { return $this->valor; }
+    public function setValor($valor) { $this->valor = $valor; }
     public function getName() { return $this->name; }
 
     //devuelve true si el valor no es nulo ni está vacío + validaciones específicas de cada tipo

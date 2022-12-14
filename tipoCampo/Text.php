@@ -19,7 +19,7 @@ class Text extends Atipo
         if (preg_match($this->patron, $this->cleanData($this->valor))){
             return true;
         }else {
-            $this->error = "No se admiten carácteres especiales y el tamaño máximo es de $this->longitud caracteres<br>";
+            $this->error = "No se admiten carácteres especiales y el tamaño máximo es de 25 caracteres<br>";
             return false;
         }
     }

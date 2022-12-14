@@ -9,6 +9,7 @@ class Formulario
 
     private $action;
     private $method;
+    private $methodGlobal; //ARRAY $_GET o $_POST
     private $rutaGuardado;
     private $campos = array();
 
@@ -17,22 +18,22 @@ class Formulario
 
     public function __construct($action = ".", $method = "get", $rutaGuardado = "./bbdd.txt", $campos = array()){
         $this->action = $action;
-        $this->$method = $method;
-        $this->$rutaGuardado = $rutaGuardado;
+        $this->method = $method;
+        $this->methodGlobal = ($this->method == self::METHOD_GET)? $_GET : $_POST;
+        $this->rutaGuardado = $rutaGuardado;
 
-        // $varGlobal = ($this->method == self::METHOD_GET)? '$_POST' : '$_GET';
-        // foreach ($campos as $campo) {
-        //     $campo->getValue() = isset($varGlobal[$campo->getName()])? $varGlobal[$campo->getName()] : null;
-        //     array_push($this->$campos, );
-        // }
         foreach ($campos as $campo) {
+            (isset($this->methodGlobal[$campo->getName()]))? $campo->setValor($this->methodGlobal[$campo->getName()]) : $campo->setValor(null);
             array_push($this->campos, $campo);
         }
-        //array_push($this->campos, $campos[0]);
-        //$this->$campos = $campos; //ARRAY CON LOS CAMPOS
+        // foreach ($campos as $campo) {
+        //     array_push($this->campos, $campo);
+        // }
+        //$this->campos = $campos; //ARRAY CON LOS CAMPOS
     }
 
     public function pintarGlobal(){
+        $this->validarGlobal();
         echo "<form action='$this->action' method='$this->method'>";
         foreach ($this->campos as $campo) {
             echo "<div>";
@@ -41,9 +42,6 @@ class Formulario
         }
         echo "<div><input type='submit' name='submit' value='Enviar' class='submit'></div>";
         echo "</form>";
-
-
-        //print_r($this->campos);
     }
 
     // public function validarGuardar(){
@@ -54,10 +52,10 @@ class Formulario
 
     public function validarGlobal() : bool
     {
-        $varGlobal = ($this->method == self::METHOD_GET)? '$_POST' : '$_GET';
-        $validado = true;
+        $validado = false;
 
-        if (isset($varGlobal['submit'])) {
+        if (isset($this->methodGlobal['submit'])) { //valida solo si se ha enviado el form
+            $validado = true;
             foreach ($this->campos as $campo) {
                 if (!$campo->validar()) {
                     $validado = false; //si un solo campo no está validado, devuelvo FALSE
