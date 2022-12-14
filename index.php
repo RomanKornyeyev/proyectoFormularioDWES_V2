@@ -17,8 +17,8 @@ $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD
     //               (null por defecto) valor    name            label                  placeholder     regex      
     $nombre = new tipoCampo\Text        (null, "nombre", "Introduce tu nombre",         "Tu nombre...", tipoCampo\Text::DEFAULT_PATTERN_25),
     $apellido = new tipoCampo\Text      (null, "apellido", "Introduce tu apellido",     "Tu apellido...", tipoCampo\Text::DEFAULT_PATTERN_25),
-    //                                                                                  
-    $aficiones = new tipoCampo\Checkbox (null, "aficiones", "Selecciona tus aficiones", )
+    //                                                                                  array                                               
+    $aficiones = new tipoCampo\Checkbox (null, "aficiones", "Selecciona tus aficiones", ["dormir", "pintar", "deportes", "leer", "musica", "cinefilo", "otros"])
 ));
 
 ?>
