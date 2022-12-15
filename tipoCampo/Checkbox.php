@@ -16,8 +16,8 @@ class Checkbox extends Atipo
     public function validarEspecifico(){
         $esValido = true;
         //si uno de los valores del checkbox no es válido, la validación devuelve false
-        foreach ($this->arr as $valor) {
-            if (!(in_array($valor, $this->arr)))
+        foreach ($this->valor as $val) {
+            if (!(in_array($val, $this->arr)))
                 $esValido = false;
         }
         $esValido ? $this->error = "" : $this->error = "¡No modifiques los valores del checkbox!";

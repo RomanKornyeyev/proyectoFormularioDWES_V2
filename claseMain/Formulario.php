@@ -7,10 +7,10 @@ use \tipoCampo\Text;
 class Formulario
 {
 
-    private $action;
-    private $method;
-    private $methodGlobal; //ARRAY $_GET o $_POST
-    private $rutaGuardado;
+    private $action; //action (ej: index.php)
+    private $method; //método de envío (get o post)
+    private $methodGlobal; //ARRAY de $_GET o $_POST (según method)
+    private $rutaGuardado; //ruta para guardar el archivo
     private $campos = array();
 
     public const METHOD_POST = "post";
@@ -47,11 +47,11 @@ class Formulario
         echo "</form>";
     }
 
-    // public function validarGuardar(){
-    //     if ($this->validarGlobal()) {
-    //         $this->guardar();
-    //     }
-    // }
+    public function validarGuardar(){
+        if ($this->validarGlobal()) {
+            $this->guardar();
+        }
+    }
 
     public function validarGlobal() : bool
     {
@@ -67,6 +67,37 @@ class Formulario
         }
 
         return $validado;
+    }
+
+    //guardado en BD
+    public function guardar(){
+
+        // Path to the "DB"
+        $file = $this->rutaGuardado;
+
+        // Open the file to get existing content
+        $current = file_get_contents($file);
+
+        // Append a new series to the file
+        foreach ($this->methodGlobal as $key => $value) {
+            //GUARDA TODOS LOS PARÁMETROS MENOS EL SUBMIT (botón submit)
+            if ($key != 'submit' ) {
+                //si no es checkbox (no es un array, recibe UNA opción)
+                if (!is_array($value)) {
+                    $current .= $value . ";";
+                //si es checkbox (es un array, recibe varias opciones)
+                } else {
+                    foreach ($value as $val) {
+                        $current .= $val." ";
+                    }
+                    $current .= ";";
+                }
+            } 
+        }
+        $current .= "\n";
+
+        // Write the contents back to the file
+        file_put_contents($file, $current);
     }
 
 }

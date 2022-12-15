@@ -5,9 +5,7 @@ spl_autoload_register(function ($class) {
 
     $classPath = realpath("./");
     $file = str_replace('\\', '/', $class);
-    //echo "FILE: ".$file."<br>";
     $include = "$classPath/${file}.php";
-    //echo $include."<br>";
     require($include);
 
 });
@@ -36,6 +34,7 @@ $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD
         <h1>Introduce tus datos</h1>
         <?php
             $formulario->pintarGlobal();
+            $formulario->validarGuardar();
             if ($formulario->validarGlobal()) echo "validao en index";
         ?>
     </div>
