@@ -1,1 +1,59 @@
-<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level></diagram>
+<diagram program="umletino" version="15.0.0"><zoom_level>5</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>530</x><y>105</y><w>105</w><h>90</h></coordinates><panel_attributes>Formulario
+--
+- action: string
+- method: string
+- methodGlobal: array
+- rutaGuardado: string
+- campos: array
+--
++ validarGlobal() : boolean
++ pintarGlobal()
++ guardar()
++ validarGuardar()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>530</x><y>235</y><w>105</w><h>95</h></coordinates><panel_attributes>Atipo
+--
+# valor: mixed (str or arr)
+# name: string
+# label: string
+# error: string
+--
++ validar()
++ imprimirError()
++ cleanData(string): string
+a+ pintar()
+a+ validarEspecifico()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>340</x><y>415</y><w>105</w><h>95</h></coordinates><panel_attributes>Texto
+--
+- placeholder: string
+- patron: string
+--
++ validarEspecifico()
++ pintar()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>325</y><w>205</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>390;10;10;180</additional_attributes></element><element><id>UMLClass</id><coordinates><x>220</x><y>415</y><w>105</w><h>95</h></coordinates><panel_attributes>Numero
+--
+- placeholder: string
+- tipo: string
+- min: int
+- max: int
+--
++ validarEspecifico()
++ pintar()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>265</x><y>325</y><w>330</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>640;10;10;180</additional_attributes></element><element><id>UMLClass</id><coordinates><x>580</x><y>415</y><w>105</w><h>95</h></coordinates><panel_attributes>Checkbox
+--
+- arr: array
+--
++ validarEspecifico()
++ pintar()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>325</y><w>60</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;180</additional_attributes></element><element><id>Relation</id><coordinates><x>575</x><y>190</y><w>50</w><h>55</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>460</x><y>415</y><w>105</w><h>95</h></coordinates><panel_attributes>Textarea
+--
+- placeholder: string
+- patron: string
+--
++ validarEspecifico()
++ pintar()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>505</x><y>325</y><w>90</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>160;10;10;180</additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>415</y><w>105</w><h>95</h></coordinates><panel_attributes>Select
+--
+- arr: array
+--
++ validarEspecifico()
++ pintar()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>820</x><y>415</y><w>105</w><h>95</h></coordinates><panel_attributes>Radio
+--
+- arr: array
+--
++ validarEspecifico()
++ pintar()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>325</y><w>180</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;340;180</additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>325</y><w>305</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;590;180</additional_attributes></element></diagram>

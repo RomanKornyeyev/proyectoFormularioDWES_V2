@@ -2,8 +2,6 @@
 
 namespace claseMain;
 
-use \tipoCampo\Text;
-
 class Formulario
 {
 
@@ -26,10 +24,6 @@ class Formulario
             (isset($this->methodGlobal[$campo->getName()]))? $campo->setValor($this->methodGlobal[$campo->getName()]) : $campo->setValor(null);
             array_push($this->campos, $campo);
         }
-        // foreach ($campos as $campo) {
-        //     array_push($this->campos, $campo);
-        // }
-        //$this->campos = $campos; //ARRAY CON LOS CAMPOS
     }
 
     public function pintarGlobal(){
@@ -45,12 +39,6 @@ class Formulario
         }
         echo "<div class='elemento'><input type='submit' name='submit' value='Enviar' class='submit'></div>";
         echo "</form>";
-    }
-
-    public function validarGuardar(){
-        if ($this->validarGlobal()) {
-            $this->guardar();
-        }
     }
 
     public function validarGlobal() : bool
@@ -98,6 +86,12 @@ class Formulario
 
         // Write the contents back to the file
         file_put_contents($file, $current);
+    }
+
+    public function validarGuardar(){
+        if ($this->validarGlobal()) {
+            $this->guardar();
+        }
     }
 
 }

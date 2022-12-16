@@ -1,0 +1,2 @@
+atipico;estuvo bien;10;2;Comedia Otros ;No;Netflix;
+Breaking Bad;ta bien;8;1;Misterio Acción Otros ;No;Piratilla;

@@ -18,7 +18,7 @@ $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD
     //                                                                                              placeholder     tipoCampo                      MIN                              MAX
     $valoracion = new tipoCampo\Numero      (null, "valoracion", "Valoracion",                      "0 - 10",       tipoCampo\Numero::TYPE_RANGE, tipoCampo\Numero::MIN_DEFAULT_0, tipoCampo\Numero::MAX_10),
     $vecesVista = new tipoCampo\Numero      (null, "vistas", "¿Cuántas veces la viste?",            "0 - 10",       tipoCampo\Numero::TYPE_NUMBER, tipoCampo\Numero::MIN_DEFAULT_0, tipoCampo\Numero::MAX_10),
-    //                                                                                              array (checkboxes)                                               
+    //                                                                                              array (checkboxes, radios, selects)                                               
     $generos = new tipoCampo\Checkbox       (null, "generos", "¿De qué generos es?",                ["Comedia", "Terror", "Misterio", "Suspense", "Acción", "Otros"]),
     $emision = new tipoCampo\Radio          (null, "emision", "¿Está en emisión?",                  ["Sí", "No"]),
     $plataforma = new tipoCampo\Select      (null, "plataforma", "¿En qué plataforma la viste?",    ["Netflix","HBO","Piratilla","Otros"])
@@ -42,7 +42,8 @@ $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD
             $formulario->validarGuardar();
             if ($formulario->validarGlobal()) echo "¡Tu registro ha sido guardado!";
         ?>
-        
+        <br><br>
+        <div class='text-center'><a href="listaSeries.php">Ver series registradas</a></div>
     </div>
 </body>
 </html>
