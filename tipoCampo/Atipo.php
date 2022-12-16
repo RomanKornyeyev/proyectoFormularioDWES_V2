@@ -33,6 +33,18 @@ abstract class Atipo
         if ($this->error != null) echo "<div class='error'>$this->error</div>";
     }
 
+    //limpieza de carácteres especiales HTML para evitar cross-site scripting
+    function cleanData($data){
+        if (is_string($data)) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        } else {
+            return $data;
+        }
+    }
+
     abstract public function pintar(); //A rellenar en la clase específica
 
     abstract public function validarEspecifico(); //A rellenar en la clase específica

@@ -11,12 +11,14 @@ spl_autoload_register(function ($class) {
 });
 
 $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD_POST, "bbdd/bbdd.txt", array(
-    //                                  =============== COMÚN ================== // ====== ESPECÍFICO ======
-    //               (null por defecto) valor    name            label                  placeholder     regex      
-    $nombre = new tipoCampo\Text        (null, "nombre", "Introduce tu nombre",         "Tu nombre...", tipoCampo\Text::DEFAULT_PATTERN_25),
-    $apellido = new tipoCampo\Text      (null, "apellido", "Introduce tu apellido",     "Tu apellido...", tipoCampo\Text::DEFAULT_PATTERN_25),
-    //                                                                                  array                                               
-    $aficiones = new tipoCampo\Checkbox (null, "aficiones", "Selecciona tus aficiones", ["dormir", "pintar", "deportes", "leer", "musica", "cinefilo", "otros"])
+    //                                      =============== COMÚN ==================   //   ====== ESPECÍFICO ======
+    //                   (null por defecto) valor    name            label                  placeholder     regex      
+    $nombre = new tipoCampo\Text            (null, "nombre", "Introduce tu nombre",         "Tu nombre...", tipoCampo\Text::DEFAULT_PATTERN_25),
+    $descripcion = new tipoCampo\Textarea   (null, "descripcion", "Introduce la desc",      "La desc...",   tipoCampo\Textarea::DEFAULT_PATTERN_500),
+    //                                                                                                      tipoCampo                      MIN                              MAX
+    $vecesVista = new tipoCampo\Numero      (null, "vistas", "¿Cuántas veces la viste?",    "0 - 10",       tipoCampo\Numero::TYPE_NUMBER, tipoCampo\Numero::MIN_DEFAULT_0, tipoCampo\Numero::MAX_10),
+    //                                                                                      array (checkboxes)                                               
+    $aficiones = new tipoCampo\Checkbox     (null, "aficiones", "Selecciona tus aficiones", ["dormir", "pintar", "deportes", "leer", "musica", "cinefilo", "otros"])
 ));
 
 ?>

@@ -1,14 +1,13 @@
 <?php
 namespace tipoCampo;
 
-class Text extends Atipo
+class Textarea extends Atipo
 {
     private $placeholder;
     private $patron;
 
-    //constantes públicas para poder utilizarse fuera
     //letras mayus y minus, números, comas, puntos, exlamaciones e interrogaciones, guiones y barras bajas
-    public const DEFAULT_PATTERN_25 = "/^[a-zA-Z0-9\s\,\.\¿\?\¡\!\_\-]{1,25}$/";
+    public const DEFAULT_PATTERN_500 = "/^[a-zA-Z0-9\s\,\.\¿\?\¡\!\_\-]{1,500}$/";
 
     public function __construct($valor, $name, $label, $placeholder, $patron){
         parent::__construct($valor,$name,$label);
@@ -22,7 +21,7 @@ class Text extends Atipo
         if (preg_match($this->patron, $this->cleanData($this->valor))){
             return true;
         }else {
-            $this->error = "No se admiten carácteres especiales y el tamaño máximo es de 25 caracteres<br>";
+            $this->error = "No se admiten carácteres especiales y el tamaño máximo es de 500 caracteres<br>";
             return false;
         }
     }
@@ -30,7 +29,7 @@ class Text extends Atipo
     function pintar(){
         //label, input y error
         echo "<label for='" . $this->name . "'>" . $this->label . "</label>";
-        echo "<input type='text' id='" . $this->name . "' name='" . $this->name . "' placeholder='$this->placeholder' value='" . $this->valor . "'>";
+        echo "<textarea id='" . $this->name . "' name='" . $this->name . "' placeholder='$this->placeholder' rows='8' cols='50'>$this->valor</textarea>";
         $this->imprimirError();
     }
 }
