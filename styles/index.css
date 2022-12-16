@@ -50,6 +50,11 @@ textarea, input, button{
     border: 1px solid var(--gray);
 }
 input[type='checkbox'], input[type='radio']{width: auto; margin-right: 1.5rem;}
+select{
+    width: 100%;
+    max-width: 30rem;
+    padding: 1.5rem;
+}
 .error{
     background-color: var(--error);
     padding: 1.5rem;
