@@ -4,15 +4,19 @@ namespace tipoCampo;
 class Text extends Atipo
 {
     private $placeholder;
+    private $tipo;
     private $patron;
 
-    //constantes públicas para poder utilizarse fuera
     //letras mayus y minus, números, comas, puntos, exlamaciones e interrogaciones, guiones y barras bajas
     public const DEFAULT_PATTERN_25 = "/^[a-zA-Z0-9\s\,\.\¿\?\¡\!\_\-]{1,25}$/";
 
-    public function __construct($valor, $name, $label, $placeholder, $patron){
+    public const TYPE_TEXT = "text";
+    public const TYPE_PSWD = "password";
+
+    public function __construct($valor, $name, $label, $placeholder, $tipo, $patron){
         parent::__construct($valor,$name,$label);
         $this->placeholder = $placeholder;
+        $this->tipo = $tipo;
         $this->patron = $patron;
     }
     
@@ -30,7 +34,7 @@ class Text extends Atipo
     function pintar(){
         //label, input y error
         echo "<label for='" . $this->name . "'>" . $this->label . "</label>";
-        echo "<input type='text' id='" . $this->name . "' name='" . $this->name . "' placeholder='$this->placeholder' value='" . $this->valor . "'>";
+        echo "<input type='$this->tipo' id='" . $this->name . "' name='" . $this->name . "' placeholder='$this->placeholder' value='" . $this->valor . "'>";
         $this->imprimirError();
     }
 }
