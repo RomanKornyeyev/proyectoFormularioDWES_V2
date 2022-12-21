@@ -12,14 +12,14 @@ spl_autoload_register(function ($class) {
 
 //                                      ACTION      METHOD                              RUTA GUARDADO   CAMPOS
 $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD_POST, "bbdd/bbdd.txt", array(
-    //                                      =================== COMÚN ==================== // ======================== ESPECÍFICO ========================
-    //            (null por defecto) valor    name            label                       placeholder     tipoCampo              regex
-    $nombre = new campo\Text         (null, "nombre", "Introduce tu nombre",              "Tu nombre...", campo\Text::TYPE_TEXT, campo\Text::DEFAULT_PATTERN_25),
-    $pass = new campo\Text           (null, "contraseña", "Introduce tu contraseña",      "Tu contra...", campo\Text::TYPE_PSWD, campo\Text::DEFAULT_PATTERN_25),
-    $descripcion = new campo\Textarea(null, "descripcion", "Introduce la desc",           "La desc...",   campo\Textarea::DEFAULT_PATTERN_500),
-    //                                                                                    placeholder     tipoCampo                 MIN                          MAX
-    $valoracion = new campo\Numero   (null, "valoracion", "Valoracion",                   "0 - 10",       campo\Numero::TYPE_RANGE, campo\Numero::MIN_DEFAULT_0, campo\Numero::MAX_10),
-    $vecesVista = new campo\Numero   (null, "vistas", "¿Cuántas veces la viste?",         "0 - 10",       campo\Numero::TYPE_NUMBER, campo\Numero::MIN_DEFAULT_0, campo\Numero::MAX_10),
+    //                                      =================== COMÚN ================ // ======================== ESPECÍFICO ========================
+    //            (null por defecto) valor    name            label                       tipoCampo              placeholder      regex
+    $nombre = new campo\Texto        (null, "nombre", "Introduce tu nombre",              campo\Texto::TYPE_TEXT, "Tu nombre...",  campo\Texto::DEFAULT_PATTERN_25),
+    $pass = new campo\Texto          (null, "contraseña", "Introduce tu contraseña",      campo\Texto::TYPE_PSWD, "Tu contra...",  campo\Texto::DEFAULT_PATTERN_25),
+    $descripcion = new campo\Texto   (null, "descripcion", "Introduce la desc",           campo\Texto::TYPE_TAREA,"La desc...",    campo\Texto::DEFAULT_PATTERN_500),
+    //                                                                                    tipoCampo                 MIN                          MAX
+    $valoracion = new campo\Numero   (null, "valoracion", "Valoracion",                   campo\Numero::TYPE_RANGE, campo\Numero::MIN_DEFAULT_0, campo\Numero::MAX_10),
+    $vecesVista = new campo\Numero   (null, "vistas", "¿Cuántas veces la viste?",         campo\Numero::TYPE_NUMBER, campo\Numero::MIN_DEFAULT_0, campo\Numero::MAX_10),
     //                                                                                    array (checkboxes, radios, selects)                                               
     $generos = new campo\Checkbox    (null, "generos", "¿De qué generos es?",             ["Comedia", "Terror", "Misterio", "Suspense", "Acción", "Otros"]),
     $emision = new campo\Radio       (null, "emision", "¿Está en emisión?",               ["Sí", "No"]),

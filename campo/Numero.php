@@ -4,7 +4,6 @@ namespace campo;
 
 class Numero extends Atipo {
 
-    private $placeholder;
     private $tipo;
     private $min;
     private $max;
@@ -19,7 +18,6 @@ class Numero extends Atipo {
 
     public function __construct($valor,$name,$label,$placeholder="",$tipo=self::TYPE_NUMBER,$min=self::MIN_DEFAULT_0,$max=self::MAX_10) {
         parent::__construct($valor,$name,$label);
-        $this->placeholder = $placeholder;
         $this->tipo = $tipo;
         $this->min = $min;
         $this->max = $max;
