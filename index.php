@@ -20,10 +20,10 @@ $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD
     //                                                                                    tipoCampo                 MIN                          MAX
     $valoracion = new campo\Numero   (null, "valoracion", "Valoracion",                   campo\Numero::TYPE_RANGE, campo\Numero::MIN_DEFAULT_0, campo\Numero::MAX_10),
     $vecesVista = new campo\Numero   (null, "vistas", "¿Cuántas veces la viste?",         campo\Numero::TYPE_NUMBER, campo\Numero::MIN_DEFAULT_0, campo\Numero::MAX_10),
-    //                                                                                    array (checkboxes, radios, selects)                                               
-    $generos = new campo\Checkbox    (null, "generos", "¿De qué generos es?",             ["Comedia", "Terror", "Misterio", "Suspense", "Acción", "Otros"]),
-    $emision = new campo\Radio       (null, "emision", "¿Está en emisión?",               ["Sí", "No"]),
-    $plataforma = new campo\Select   (null, "plataforma", "¿En qué plataforma la viste?", ["Netflix","HBO","Piratilla","Otros"]),
+    //                                                                                    tipoCampo                      array (checkboxes, radios, selects)                                               
+    $generos = new campo\Multiple    (null, "generos", "¿De qué generos es?",             campo\Multiple::TYPE_CHECKBOX, ["Comedia", "Terror", "Misterio", "Suspense", "Acción", "Otros"]),
+    $emision = new campo\Multiple    (null, "emision", "¿Está en emisión?",               campo\Multiple::TYPE_RADIO,    ["Sí", "No"]),
+    $plataforma = new campo\Multiple (null, "plataforma", "¿En qué plataforma la viste?", campo\Multiple::TYPE_SELECT,   ["Netflix","HBO","Piratilla","Otros"]),
     //                                                                                    f_ini             f_fin
     $fecha = new campo\Fecha         (null, "fecha", "Introduce la fecha",                campo\Fecha::NOW, campo\Fecha::PLUS_ONE_WEEK)
 ));

@@ -16,7 +16,7 @@ class Numero extends Atipo {
     public const MAX_10=10;
     public const MAX_15=15;
 
-    public function __construct($valor,$name,$label,$placeholder="",$tipo=self::TYPE_NUMBER,$min=self::MIN_DEFAULT_0,$max=self::MAX_10) {
+    public function __construct($valor,$name,$label,$tipo=self::TYPE_NUMBER,$min=self::MIN_DEFAULT_0,$max=self::MAX_10) {
         parent::__construct($valor,$name,$label);
         $this->tipo = $tipo;
         $this->min = $min;
