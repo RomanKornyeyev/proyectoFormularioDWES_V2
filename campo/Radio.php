@@ -1,6 +1,6 @@
 <?php
 
-namespace tipoCampo;
+namespace campo;
 
 class Radio extends Atipo
 {

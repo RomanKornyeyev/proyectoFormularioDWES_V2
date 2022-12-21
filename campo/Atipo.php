@@ -1,5 +1,5 @@
 <?php
-namespace tipoCampo;
+namespace campo;
 
 abstract class Atipo
 {    

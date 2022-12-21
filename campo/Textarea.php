@@ -1,5 +1,5 @@
 <?php
-namespace tipoCampo;
+namespace campo;
 
 class Textarea extends Atipo
 {
