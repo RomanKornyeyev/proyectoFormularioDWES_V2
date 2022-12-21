@@ -23,7 +23,8 @@ $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD
     //                                                                                        array (checkboxes, radios, selects)                                               
     $generos = new tipoCampo\Checkbox    (null, "generos", "¿De qué generos es?",             ["Comedia", "Terror", "Misterio", "Suspense", "Acción", "Otros"]),
     $emision = new tipoCampo\Radio       (null, "emision", "¿Está en emisión?",               ["Sí", "No"]),
-    $plataforma = new tipoCampo\Select   (null, "plataforma", "¿En qué plataforma la viste?", ["Netflix","HBO","Piratilla","Otros"])
+    $plataforma = new tipoCampo\Select   (null, "plataforma", "¿En qué plataforma la viste?", ["Netflix","HBO","Piratilla","Otros"]),
+    $fecha = new tipoCampo\Fecha         (null, "fecha", "Introduce la fecha",                tipoCampo\Fecha::NOW, tipoCampo\Fecha::PLUS_ONE_WEEK)
 ));
 
 ?>
