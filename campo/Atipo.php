@@ -7,16 +7,21 @@ abstract class Atipo
     protected $name; //name en HTML
     protected $label; //texto del label
     protected $error; //error personalizado por cada campo
+    protected $claseWrapper = array(); //clases CSS personalizada para el div que envuelve el input+label+error
+    protected $claseInput = array(); //clases CSS personalizada para el input
 
-    public function __construct($valor = "", $name = "", $label = "") {
+    public function __construct($valor = "", $name = "", $label = "", $claseWrapper = array("input-wrapper"), $claseInput = array("input")) {
         $this->valor = $valor;
         $this->name = $name;
         $this->label = $label;
+        $this->claseWrapper = $claseWrapper;
+        $this->claseInput = $claseInput;
     }
 
     public function getValor() { return $this->valor; }
     public function setValor($valor) { $this->valor = $valor; }
     public function getName() { return $this->name; }
+    public function getClaseWrapper() { return $this->claseWrapper;}
 
     //devuelve true si el valor no es nulo ni está vacío + validaciones específicas de cada tipo
     public function validar(){        

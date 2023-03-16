@@ -16,8 +16,8 @@ class Numero extends Atipo {
     public const MAX_10=10;
     public const MAX_15=15;
 
-    public function __construct($valor,$name,$label,$tipo=self::TYPE_NUMBER,$min=self::MIN_DEFAULT_0,$max=self::MAX_10) {
-        parent::__construct($valor,$name,$label);
+    public function __construct($valor,$name,$label,$claseWrapper,$claseInput,$tipo=self::TYPE_NUMBER,$min=self::MIN_DEFAULT_0,$max=self::MAX_10) {
+        parent::__construct($valor,$name,$label,$claseWrapper,$claseInput);
         $this->tipo = $tipo;
         $this->min = $min;
         $this->max = $max;
@@ -33,9 +33,11 @@ class Numero extends Atipo {
     }
 
     function pintar() {
+        echo "<div class='".implode(" ", $this->claseWrapper)."'>";
         echo "<label for='$this->name'>$this->label</label>";
-        echo "<input type='$this->tipo' name='$this->name' min='$this->min' max='$this->max' value='$this->valor' placeholder='$this->min - $this->max'>";
+        echo "<input type='$this->tipo' name='$this->name' min='$this->min' max='$this->max' value='$this->valor' placeholder='$this->min - $this->max' class='".implode(" ", $this->claseInput)."'>";
         $this->imprimirError();
+        echo "</div>";
     }
 }
 ?>

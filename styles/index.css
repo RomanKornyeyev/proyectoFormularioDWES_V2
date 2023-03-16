@@ -34,7 +34,7 @@ h1{
     gap: 2.5rem;
     width: 100%;
 }
-.elemento{
+.input-wrapper{
     display: flex;
     flex-flow: column;
     gap: .75rem;

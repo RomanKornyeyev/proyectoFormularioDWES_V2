@@ -11,8 +11,8 @@ class Multiple extends Atipo
     public const TYPE_RADIO = "radio";
     public const TYPE_SELECT = "select";
 
-    public function __construct($valor, $name, $label, $tipo=self::TYPE_CHECKBOX, $arr = []){
-        parent::__construct($valor,$name,$label);
+    public function __construct($valor, $name, $label, $claseWrapper, $claseInput, $tipo=self::TYPE_CHECKBOX, $arr = []){
+        parent::__construct($valor,$name,$label,$claseWrapper,$claseInput);
         $this->tipo = $tipo;
         foreach ($arr as $valor){
             array_push($this->arr, $valor);

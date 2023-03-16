@@ -10,8 +10,8 @@ class Fecha extends Atipo
     public const NOW = "now";
     public const PLUS_ONE_WEEK = "+1 week";
 
-    public function __construct($valor, $name, $label, $inicio = self::NOW, $fin = self::PLUS_ONE_WEEK){
-        parent::__construct($valor,$name,$label);
+    public function __construct($valor, $name, $label, $claseWrapper, $claseInput, $inicio = self::NOW, $fin = self::PLUS_ONE_WEEK){
+        parent::__construct($valor,$name,$label,$claseWrapper,$claseInput);
         $this->inicio = strtotime($inicio);
         $this->fin = strtotime($fin);
     }
@@ -29,10 +29,16 @@ class Fecha extends Atipo
     }
 
     function pintar(){
-        //label, input y error
-        echo "<label for='$this->name'>$this->label (entre ".date("Y-m-d", $this->inicio)." y ".date("Y-m-d", $this->fin).")</label>";
-        echo "<input type='date' id='" . $this->name . "' name='" . $this->name . "' value='" . $this->valor . "'>";
-        $this->imprimirError();
+        echo "<div class='";
+            echo implode(" ", $this->claseWrapper);
+        echo "'>";
+            //label, input y error
+            echo "<label for='$this->name'>$this->label (entre ".date("Y-m-d", $this->inicio)." y ".date("Y-m-d", $this->fin).")</label>";
+            echo "<input type='date' id='" . $this->name . "' name='" . $this->name . "' value='" . $this->valor . "' class='";
+                echo implode(" ", $this->claseInput);
+            echo "'>";
+            $this->imprimirError();
+        echo "</div>";
     }
 }
 
