@@ -35,24 +35,13 @@ class Texto extends Atipo
     }
 
     function pintar(){
-        //wrapper
-        echo "<div class='";
-            echo implode(" ", $this->claseWrapper);
-        echo "'>";
-        //wrapper > label
-        echo "<label for='" . $this->name . "'>" . $this->label . "</label>";
-        //wrapper > input
-        if ($this->tipo == self::TYPE_TAREA){
-            echo "<textarea id='" . $this->name . "' name='" . $this->name . "' placeholder='$this->placeholder' rows='8' cols='50' class='";
-                echo implode(" ", $this->claseInput);
-            echo "'>$this->valor</textarea>";
-        }else{
-            echo "<input type='$this->tipo' id='" . $this->name . "' name='" . $this->name . "' placeholder='$this->placeholder' value='" . $this->valor . "' class='";
-                echo implode(" ", $this->claseInput);
-            echo "'>";
-        }
+        echo "<label for='$this->name'>$this->label</label>";
+        if ($this->tipo == self::TYPE_TAREA)
+            echo "<textarea id='$this->name' name='$this->name' placeholder='$this->placeholder' rows='8' cols='50' class='".implode(" ", $this->claseInput)."'>$this->valor</textarea>";
+        else
+            echo "<input type='$this->tipo' id='$this->name' name='$this->name' placeholder='$this->placeholder' value='$this->valor' class='".implode(" ", $this->claseInput)."'>";
+
         $this->imprimirError();
-        echo "</div>";
         
     }
 }

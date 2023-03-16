@@ -8,14 +8,16 @@ class Formulario
     private $action; //action (ej: index.php)
     private $method; //método de envío (get o post)
     private $methodGlobal; //ARRAY de $_GET o $_POST (según method)
-    private $campos = array();
+    private $claseForm = array(); //ARRAY de clases (css) del form
+    private $campos = array(); //ARRAY de campos
 
     public const METHOD_POST = "post";
     public const METHOD_GET = "get";
 
-    public function __construct($action = ".", $method = self::METHOD_POST, $campos = array()){
+    public function __construct($action = ".", $method = self::METHOD_POST, $claseForm = array("formulario"), $campos = array()){
         $this->action = $action;
         $this->method = $method;
+        $this->claseForm = $claseForm;
         $this->methodGlobal = ($this->method == self::METHOD_GET)? $_GET : $_POST;
 
         foreach ($campos as $campo) {
@@ -29,11 +31,11 @@ class Formulario
         $this->validarGlobal();
 
         //printeo del formulario
-        echo "<form action='$this->action' method='$this->method' class='formulario'>";
+        echo "<form action='$this->action' method='$this->method' class='".implode(" ", $this->claseForm)."'>";
         foreach ($this->campos as $campo) {
-            // echo "<div class='".implode(" ", $campo->getClaseWrapper())."'>";
+            echo "<div class='".implode(" ", $campo->getClaseWrapper())."'>";
             $campo->pintar(); //output: <input>
-            // echo "</div>";
+            echo "</div>";
         }
         echo "<div class='elemento'><input type='submit' name='submit' value='Enviar' class='submit'></div>";
         echo "</form>";

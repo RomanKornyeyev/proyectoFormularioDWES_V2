@@ -39,6 +39,12 @@ h1{
     flex-flow: column;
     gap: .75rem;
 }
+.input-multiple{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 5px;
+    padding: 5px;
+}
 
 input,textarea,button,select{
     border: none;
@@ -54,7 +60,7 @@ textarea, input, button{
 input[type='checkbox'], input[type='radio']{width: auto; margin-right: 1.5rem;}
 select{
     width: 100%;
-    max-width: 30rem;
+    /* max-width: 30rem; */
     padding: 1.5rem;
 }
 .error{
