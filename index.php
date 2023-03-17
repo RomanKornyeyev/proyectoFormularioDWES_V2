@@ -9,7 +9,7 @@ spl_autoload_register(function ($class) {
 });
 
 // ================================= INICIALIZACIÓN DEL FORM =================================
-//                                       ACTION                 METHOD                   clases-css    CAMPOS
+//                                       ACTION                 METHOD                clases-css-form  CAMPOS
 $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD_POST, ["formulario"], array(
     //                                  ================================ COMÚN ================================ // ======================== ESPECÍFICO ========================
     //            (null por defecto) valor    name            label     clases-css-wrapper   clases-css-input          tipoCampo            placeholder              regex
@@ -24,7 +24,9 @@ $formulario = new claseMain\Formulario("index.php", claseMain\Formulario::METHOD
     $emision = new campo\Multiple    (null, "emision",   "¿En emisión?", ["input-wrapper"],  [""],              ["input-multiple"], campo\Multiple::TYPE_RADIO,    ["Sí", "No"]),
     $plataforma = new campo\Multiple (null, "plataforma","¿Plataforma?", ["input-wrapper"],  [""],              ["input-multiple"], campo\Multiple::TYPE_SELECT,   ["Netflix","HBO","Piratilla","Otros"]),
     //                                                                                                                f_ini             f_fin
-    $fecha = new campo\Fecha         (null, "fecha",        "Fecha",     ["input-wrapper"],  ["input"],         campo\Fecha::NOW, campo\Fecha::PLUS_ONE_WEEK)
+    $fecha = new campo\Fecha         (null, "fecha",        "Fecha",     ["input-wrapper"],  ["input"],         campo\Fecha::NOW, campo\Fecha::PLUS_ONE_WEEK),
+    //                                                                                                          texto botón submit
+    $submit = new campo\Submit       (null, "submit",        null,       ["input-wrapper"],  ["input"],         "ENVIAR")
 ));
 
 //FUNCIONAL

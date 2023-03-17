@@ -7,7 +7,7 @@ class Formulario
 
     private $action; //action (ej: index.php)
     private $method; //método de envío (get o post)
-    private $methodGlobal; //ARRAY de $_GET o $_POST (según method)
+    private $methodGlobal; //ARRAY de $_GET o $_POST (según method), OJO, ES EL ARRAY de $_GET/$_POST, NO EL MÉTODO QUE SE UTILIZA
     private $claseForm = array(); //ARRAY de clases (css) del form
     private $campos = array(); //ARRAY de campos
 
@@ -37,7 +37,6 @@ class Formulario
             $campo->pintar(); //output: <input>
             echo "</div>";
         }
-        echo "<div class='elemento'><input type='submit' name='submit' value='Enviar' class='submit'></div>";
         echo "</form>";
     }
 

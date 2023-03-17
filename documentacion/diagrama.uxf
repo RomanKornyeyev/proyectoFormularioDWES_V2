@@ -7,9 +7,7 @@
 - campos: array
 --
 + validarGlobal() : boolean
-+ pintarGlobal()
-+ guardar()
-+ validarGuardar()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>504</x><y>256</y><w>168</w><h>152</h></coordinates><panel_attributes>Atipo
++ pintarGlobal()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>504</x><y>256</y><w>168</w><h>152</h></coordinates><panel_attributes>Atipo
 --
 # valor: mixed (str or arr)
 # name: string

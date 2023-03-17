@@ -24,7 +24,7 @@ class Multiple extends Atipo
     public function validarEspecifico(){
         $esValido = true;
 
-        //si es checkbox
+        //--- si es checkbox ---
         if ($this->tipo == "checkbox") {
             //si uno de los valores del checkbox no es válido, la validación devuelve false
             foreach ($this->valor as $val) {
@@ -57,7 +57,7 @@ class Multiple extends Atipo
             echo "<div class='".implode(" ", $this->claseMultiple)."'>";
             foreach ($this->arr as $value) {
                 //por cada input checkbox, comprueba que el valor NO ESTÉ MARCADO
-                if(!empty($this->valor)) // --- CAMBIAR EL GET A $VALOR (PROTECTED) -----
+                if(!empty($this->valor))
                     //si no lo está, no lo marca, si lo está lo marca (check)
                     (in_array($value, $this->valor)) ? $checked = "checked" : $checked = "";
 
