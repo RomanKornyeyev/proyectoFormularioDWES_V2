@@ -15,6 +15,7 @@ class Texto extends Atipo
     public const TYPE_TEXT = "text";
     public const TYPE_TAREA = "textarea";
     public const TYPE_PSWD = "password";
+    public const TYPE_HIDDEN = "hidden";
 
     public function __construct($null,$valor, $name, $label, $claseWrapper, $claseInput, $tipo = self::TYPE_TEXT, $placeholder, $patron = self::DEFAULT_PATTERN_25){
         parent::__construct($null,$valor,$name,$label,$claseWrapper,$claseInput);
