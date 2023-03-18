@@ -43,17 +43,18 @@ $formulario = new Formulario("index.php", Formulario::METHOD_POST, ["formulario"
 <body>
     <div class="main">
         <h1>Introduce tus datos</h1>
-        <!-- pintar global lleva implicito los errores personalizados -->
-        <?php $formulario->pintarGlobal(); ?>
-        <!-- vaciamos campos en caso de insert exitoso -->
+        <!-- validación de campos (siempre por encima de pintarGlobal()) -->
         <?php 
             if ($formulario->validarGlobal()){
-                $formulario->vaciarCampos();
+                // $formulario->vaciarCampos();
                 echo "--- CORRECTO! =) ---";
-            }else{
+            }else if(isset($_POST['enviar']) && !$formulario->validarGlobal()){
                 echo "--- INCORRECTO!!! =( ---";
             }
         ?>
+        <!-- pintar global lleva implicito los errores personalizados -->
+        <?php $formulario->pintarGlobal(); ?>
+        
         <br><br>
         <div class='text-center'><a href="listaSeries.php">Ver series registradas</a></div>
     </div>

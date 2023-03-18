@@ -54,6 +54,11 @@ class Formulario
         //validamos para cargar la variable error y printearla
         $this->validarGlobal();
 
+        //vaciado de campos si están validados, útil si queremos insertar más entradas en una misma página
+        if ($this->validarGlobal()) {
+            $this->vaciarCampos();
+        }
+
         //printeo del formulario
         echo "<form action='$this->action' method='$this->method' class='".implode(" ", $this->claseForm)."'>";
         foreach ($this->campos as $campo) {
@@ -84,14 +89,20 @@ class Formulario
     }
 
     public function vaciarCampos(){
+        // --- VACIADO CON JS (LEGACY) xd me creo guay por poner legacy en vez de antiguo ---
         //IMP: solo sirve para texto y numeros. No va para multiple y fecha, de momento no es necesario
         //si el form está validad, vacía los campos
+        // if($this->validarGlobal()){
+        //     echo "<script>";
+        //     foreach ($this->campos as $campo) {
+        //         echo "document.getElementById('".$campo->getName()."').value='';";
+        //     }
+        //     echo "</script>";
+        // }
         if($this->validarGlobal()){
-            echo "<script>";
             foreach ($this->campos as $campo) {
-                echo "document.getElementById('".$campo->getName()."').value='';";
+                $campo->setValor("");
             }
-            echo "</script>";
         }
         
     }
