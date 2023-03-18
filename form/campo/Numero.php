@@ -34,8 +34,8 @@ class Numero extends Atipo {
     }
 
     function pintar() {
-        echo "<label for='$this->name'>$this->label</label>";
-        echo "<input type='$this->tipo' id='$this->name' name='$this->name' min='$this->min' max='$this->max' value='$this->valor' placeholder='$this->min - $this->max' class='".implode(" ", $this->claseInput)."'>";
+        echo "<label for='$this->name'>$this->label</label>\n";
+        echo "<input type='$this->tipo' id='$this->name' name='$this->name' min='$this->min' max='$this->max' value='$this->valor' placeholder='$this->min - $this->max' class='".implode(" ", $this->claseInput)."'>\n";
         $this->imprimirError();
     }
 }

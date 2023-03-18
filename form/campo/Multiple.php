@@ -55,42 +55,42 @@ class Multiple extends Atipo
 
 
     public function pintar(){
-        echo "<label for='$this->name'>$this->label</label>";
+        echo "<label for='$this->name'>$this->label</label>\n";
 
         // --- si es checkbox --- 
         if ($this->tipo == "checkbox") {
             $checked ="";
-            echo "<div class='".implode(" ", $this->claseMultiple)."'>";
+            echo "<div class='".implode(" ", $this->claseMultiple)."'>\n";
             foreach ($this->arr as $value) {
                 //por cada input checkbox, comprueba que el valor NO ESTÉ MARCADO
                 if(!empty($this->valor))
                     //si no lo está, no lo marca, si lo está lo marca (check)
                     (in_array($value, $this->valor)) ? $checked = "checked" : $checked = "";
 
-                echo "<label for='$value'>$value</label> <input type='checkbox' id='$value' class='".implode(" ", $this->claseInput)."' name='".$this->getName()."[]' value='$value' $checked >";
+                echo "<label for='$value'>$value</label>\n <input type='checkbox' id='$value' class='".implode(" ", $this->claseInput)."' name='".$this->getName()."[]' value='$value' $checked >\n";
             }
-            echo "</div>";
+            echo "</div>\n";
         // --- si es radio --- 
         }else if($this->tipo == "radio"){
-            echo "<div class='".implode(" ", $this->claseMultiple)."'>";
+            echo "<div class='".implode(" ", $this->claseMultiple)."'>\n";
             $checked ="";
             foreach ($this->arr as $value) {
                 //comprueba que esté seleccionado y lo deja seleccionado si lo estaba
                 ($this->valor == $value) ? $checked = "checked" : $checked = "";
-                echo "<input type='radio' id='$value' class='".implode(" ", $this->claseInput)."' name='$this->name' value='$value' $checked>";
-                echo "<label for='$value'>$value</label><br>";
+                echo "<input type='radio' id='$value' class='".implode(" ", $this->claseInput)."' name='$this->name' value='$value' $checked>\n";
+                echo "<label for='$value'>$value</label><br>\n";
             }
-            echo "</div>";
+            echo "</div>\n";
         // --- si es select ---
         }else{
-            echo "<select id='$this->name' class='".implode(" ", $this->claseInput)."' name='$this->name'>";
+            echo "<select id='$this->name' class='".implode(" ", $this->claseInput)."' name='$this->name'>\n";
             $selected = "";
             foreach ($this->arr as $value) {
                 //comprueba que esté seleccionado y lo deja seleccionado si lo estaba
                 ($this->valor == $value) ? $selected = "selected" : $selected = "";
-                echo "<option value='$value' $selected>$value</option>";
+                echo "<option value='$value' $selected>$value</option>\n";
             }
-            echo '</select>';
+            echo "</select>\n";
         }
 
         //error personalizado

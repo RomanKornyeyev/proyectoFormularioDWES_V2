@@ -31,8 +31,8 @@ class Fecha extends Atipo
 
     function pintar(){
         //label, input y error
-        echo "<label for='$this->name'>$this->label (entre ".date("Y-m-d", $this->inicio)." y ".date("Y-m-d", $this->fin).")</label>";
-        echo "<input type='date' id='$this->name' name='$this->name' value='$this->valor' class='".implode(" ", $this->claseInput)."'>";
+        echo "<label for='$this->name'>$this->label (entre ".date("Y-m-d", $this->inicio)." y ".date("Y-m-d", $this->fin).")</label>\n";
+        echo "<input type='date' id='$this->name' name='$this->name' value='$this->valor' class='".implode(" ", $this->claseInput)."'>\n";
         $this->imprimirError();
     }
 }

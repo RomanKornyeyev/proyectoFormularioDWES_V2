@@ -38,11 +38,11 @@ class Texto extends Atipo
     }
 
     function pintar(){
-        echo "<label for='$this->name'>$this->label</label>";
+        echo "<label for='$this->name'>$this->label</label>\n";
         if ($this->tipo == self::TYPE_TAREA)
-            echo "<textarea id='$this->name' name='$this->name' placeholder='$this->placeholder' rows='8' cols='50' class='".implode(" ", $this->claseInput)."'>$this->valor</textarea>";
+            echo "<textarea id='$this->name' name='$this->name' placeholder='$this->placeholder' rows='8' cols='50' class='".implode(" ", $this->claseInput)."'>$this->valor</textarea>\n";
         else
-            echo "<input type='$this->tipo' id='$this->name' name='$this->name' placeholder='$this->placeholder' value='$this->valor' class='".implode(" ", $this->claseInput)."'>";
+            echo "<input type='$this->tipo' id='$this->name' name='$this->name' placeholder='$this->placeholder' value='$this->valor' class='".implode(" ", $this->claseInput)."'>\n";
 
         $this->imprimirError();
         

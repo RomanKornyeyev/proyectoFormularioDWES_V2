@@ -60,16 +60,16 @@ class Formulario
         }
 
         //printeo del formulario
-        echo "<form action='$this->action' method='$this->method' class='".implode(" ", $this->claseForm)."'>";
+        echo "<form action='$this->action' method='$this->method' class='".implode(" ", $this->claseForm)."'>\n";
         foreach ($this->campos as $campo) {
-            echo "<div class='".implode(" ", $campo->getClaseWrapper())."'>";
+            echo "<div class='".implode(" ", $campo->getClaseWrapper())."'>\n";
             $campo->pintar(); //output: <input>
-            echo "</div>";
+            echo "</div>\n";
         }
-        echo "<div class='".implode(" ", $this->claseSubmitWrapper)."'>";
-        echo "<input type='submit' id='$this->idSubmit' name='$this->nameSubmit' value='$this->valorSubmit' class='".implode(" ", $this->claseSubmitInput)."'>";   
-        echo "</div>";
-        echo "</form>";
+        echo "<div class='".implode(" ", $this->claseSubmitWrapper)."'>\n";
+        echo "<input type='submit' id='$this->idSubmit' name='$this->nameSubmit' value='$this->valorSubmit' class='".implode(" ", $this->claseSubmitInput)."'>\n";   
+        echo "</div>\n";
+        echo "</form>\n";
     }
 
     public function validarGlobal() : bool
