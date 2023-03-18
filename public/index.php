@@ -13,14 +13,14 @@ use form\claseMain\Formulario;
 //                             ACTION            METHOD           clases-css-form  CAMPOS
 $formulario = new Formulario("index.php", Formulario::METHOD_POST, ["formulario"], array(
     //                                  ================================ COMÚN ================================ // ======================== ESPECÍFICO ========================
-    //            (null por defecto) valor    name            label     clases-css-wrapper   clases-css-input          tipoCampo            placeholder              regex
+    //      (null por defecto) valor    name            label      clases-css-wrapper  clases-css-input      tipoCampo       placeholder         regex
     $nombre = new Texto        (null, "nombre",       "Nombre",    ["input-wrapper"],  ["input"],         Texto::TYPE_TEXT, "Tu nombre...",  Texto::DEFAULT_PATTERN_25),
     $pass = new Texto          (null, "contraseña",   "Password",  ["input-wrapper"],  ["input"],         Texto::TYPE_PSWD, "Tu contra...",  Texto::DEFAULT_PATTERN_25),
     $descripcion = new Texto   (null, "descripcion",  "Descrip",   ["input-wrapper"],  ["input"],         Texto::TYPE_TAREA,"La desc...",    Texto::DEFAULT_PATTERN_500),
-    //                                                                                                               tipoCampo                   min                         max
+    //                                                                                                        tipoCampo            min                     max
     $valoracion = new Numero   (null, "valoracion", "Valoracion",  ["input-wrapper"],  ["input"],         Numero::TYPE_RANGE, Numero::MIN_DEFAULT_0, Numero::MAX_10),
     $vecesVista = new Numero   (null, "vistas",   "¿Veces vista?", ["input-wrapper"],  ["input"],         Numero::TYPE_NUMBER, Numero::MIN_DEFAULT_0, Numero::MAX_10),
-    //                                                                                                          clase-wrapper(chboxes)    tipoCampo                      array (checkboxes, radios, selects)                                               
+    //                                                                                                  clase-wrapper(chboxes)     tipoCampo                     array (checkboxes, radios, selects)                                               
     $generos = new Multiple    (null, "generos",     "¿Géneros?",  ["input-wrapper"],  [""],              ["input-multiple"], Multiple::TYPE_CHECKBOX, ["Comedia", "Terror", "Misterio", "Suspense", "Acción", "Otros"]),
     $emision = new Multiple    (null, "emision",   "¿En emisión?", ["input-wrapper"],  [""],              ["input-multiple"], Multiple::TYPE_RADIO,    ["Sí", "No"]),
     $plataforma = new Multiple (null, "plataforma","¿Plataforma?", ["input-wrapper"],  [""],              ["input-multiple"], Multiple::TYPE_SELECT,   ["Netflix","HBO","Piratilla","Otros"]),
