@@ -96,6 +96,20 @@ $formulario = new Formulario("index.php", Formulario::METHOD_POST, ["formulario"
 // claseWrappSubmit  idSubmit  nameSubm  txtSubmit  clseSubmit
 ), ["input-wrapper"], "enviar", "enviar", "ENVIAR", ["input"]);
 ```
+La estructura generada del formulario será la siguiente (obviamente aplicándole clases y valores personalizados):
+```html
+<form>
+    <div>
+        <label></label>
+        <input></input>
+    </div>
+    .
+    .
+    <div>
+        <input type='submit'></input>
+    </div>
+</form>
+```
 <br>
 
 Bien, ya tenemos instanciado nuestro formulario. Y tenemos 3 acciones principales:
