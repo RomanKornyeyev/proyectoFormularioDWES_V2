@@ -114,19 +114,19 @@ La estructura generada del formulario será la siguiente (obviamente aplicándol
 
 Bien, ya tenemos instanciado nuestro formulario. Y tenemos 3 acciones principales:
 1. <b>Pintar todo el formulario</b> (lo cual meteremos dentro del HTML/template). Esta función nos pinta el formulario con todos los campos y conserva los datos en caso de error y vacía los campos si se ha submiteado y se han validado todos los inputs:
-```php
-//pintar global lleva implicito los errores personalizados
-<?php $formulario->pintarGlobal(); ?>
-```
+    ```php
+    //pintar global lleva implicito los errores personalizados
+    <?php $formulario->pintarGlobal(); ?>
+    ```
 2. <b>Validar todos los campos</b>, esta función devuelve un booleano, true si todos han sido validados o false en caso contrario, que se podrá usar como condicional en un if. <b>IMP: usarlo por encima de pintarGlobal(), es decir, ponerlo antes en el código</b>:
-```php
-<?php
-    //si el form ha sido validado
-    if ($formulario->validarGlobal()){
-        //hace algo
-    }
-    $formulario->pintarGlobal();
-?>
-```
+    ```php
+    <?php
+        //si el form ha sido validado
+        if ($formulario->validarGlobal()){
+            //hace algo
+        }
+        $formulario->pintarGlobal();
+    ?>
+    ```
 
 Una vez validados todos los campos del formulario, podremos hacer x acciones, evitando así posibles inyecciones SQL y/o ataques XSS.
