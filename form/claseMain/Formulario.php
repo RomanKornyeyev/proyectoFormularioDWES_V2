@@ -1,6 +1,6 @@
 <?php
 
-namespace claseMain;
+namespace form\claseMain;
 
 class Formulario
 {
@@ -11,20 +11,44 @@ class Formulario
     private $claseForm = array(); //ARRAY de clases (css) del form
     private $campos = array(); //ARRAY de campos
 
+    private $claseSubmitWrapper = array();
+    private $idSubmit;
+    private $nameSubmit;
+    private $valorSubmit;
+    private $claseSubmitInput = array();
+
     public const METHOD_POST = "post";
     public const METHOD_GET = "get";
 
-    public function __construct($action = ".", $method = self::METHOD_POST, $claseForm = array("formulario"), $campos = array()){
+    public function __construct(
+        $action = ".",
+        $method = self::METHOD_POST,
+        $claseForm = array("formulario"),
+        $campos = array(),
+        $claseSubmitWrapper = array(""),
+        $idSubmit = "",
+        $nameSubmit = "submit",
+        $valorSubmit = "submit",
+        $claseSubmitInput = array(""))
+    {
         $this->action = $action;
         $this->method = $method;
         $this->claseForm = $claseForm;
         $this->methodGlobal = ($this->method == self::METHOD_GET)? $_GET : $_POST;
+
+        $this->claseSubmitWrapper = $claseSubmitWrapper;
+        $this->idSubmit = $idSubmit;
+        $this->nameSubmit = $nameSubmit;
+        $this->valorSubmit = $valorSubmit;
+        $this->claseSubmitInput = $claseSubmitInput;
 
         foreach ($campos as $campo) {
             (isset($this->methodGlobal[$campo->getName()]))? $campo->setValor($this->methodGlobal[$campo->getName()]) : $campo->setValor(null);
             array_push($this->campos, $campo);
         }
     }
+
+    public function getMethodGlobal() { return $this->methodGlobal; }
 
     public function pintarGlobal(){
         //validamos para cargar la variable error y printearla
@@ -37,6 +61,9 @@ class Formulario
             $campo->pintar(); //output: <input>
             echo "</div>";
         }
+        echo "<div class='".implode(" ", $this->claseSubmitWrapper)."'>";
+        echo "<input type='submit' id='$this->idSubmit' name='$this->nameSubmit' value='$this->valorSubmit' class='".implode(" ", $this->claseSubmitInput)."'>";   
+        echo "</div>";
         echo "</form>";
     }
 
@@ -44,7 +71,7 @@ class Formulario
     {
         $validado = false;
 
-        if (isset($this->methodGlobal['submit'])) { //valida solo si se ha enviado el form
+        if (isset($this->methodGlobal[$this->nameSubmit])) { //valida solo si se ha enviado el form
             $validado = true;
             foreach ($this->campos as $campo) {
                 if (!$campo->validar()) {
@@ -54,6 +81,19 @@ class Formulario
         }
 
         return $validado;
+    }
+
+    public function vaciarCampos(){
+        //IMP: solo sirve para texto y numeros. No va para multiple y fecha, de momento no es necesario
+        //si el form está validad, vacía los campos
+        if($this->validarGlobal()){
+            echo "<script>";
+            foreach ($this->campos as $campo) {
+                echo "document.getElementById('".$campo->getName()."').value='';";
+            }
+            echo "</script>";
+        }
+        
     }
 }
 

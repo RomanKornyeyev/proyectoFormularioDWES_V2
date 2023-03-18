@@ -1,6 +1,6 @@
 <?php
 
-namespace campo;
+namespace form\campo;
 
 class Multiple extends Atipo
 {

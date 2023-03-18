@@ -1,6 +1,6 @@
 <?php
 
-namespace campo;
+namespace form\campo;
 
 class Numero extends Atipo {
 
@@ -34,7 +34,7 @@ class Numero extends Atipo {
 
     function pintar() {
         echo "<label for='$this->name'>$this->label</label>";
-        echo "<input type='$this->tipo' name='$this->name' min='$this->min' max='$this->max' value='$this->valor' placeholder='$this->min - $this->max' class='".implode(" ", $this->claseInput)."'>";
+        echo "<input type='$this->tipo' id='$this->name' name='$this->name' min='$this->min' max='$this->max' value='$this->valor' placeholder='$this->min - $this->max' class='".implode(" ", $this->claseInput)."'>";
         $this->imprimirError();
     }
 }

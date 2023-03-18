@@ -1,4 +1,0 @@
-atipico;estuvo bien;10;2;Comedia Otros ;No;Netflix;
-Breaking Bad;ta bien;8;1;Misterio Acción Otros ;No;Piratilla;
-asdasd;sdasdas;dasdasd;5;5;Comedia ;Sí;HBO;2023-03-05;
-asdasd;sdasdas;dasdasd;5;5;Comedia ;Sí;HBO;2023-03-05;
