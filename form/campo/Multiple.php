@@ -12,8 +12,8 @@ class Multiple extends Atipo
     public const TYPE_RADIO = "radio";
     public const TYPE_SELECT = "select";
 
-    public function __construct($valor,$name,$label,$claseWrapper,$claseInput,$claseMultiple=array(""),$tipo=self::TYPE_CHECKBOX,$arr = []){
-        parent::__construct($valor,$name,$label,$claseWrapper,$claseInput);
+    public function __construct($null,$valor,$name,$label,$claseWrapper,$claseInput,$claseMultiple=array(""),$tipo=self::TYPE_CHECKBOX,$arr = []){
+        parent::__construct($null,$valor,$name,$label,$claseWrapper,$claseInput);
         $this->claseMultiple = $claseMultiple;
         $this->tipo = $tipo;
         foreach ($arr as $valor){
@@ -28,14 +28,20 @@ class Multiple extends Atipo
         if ($this->tipo == "checkbox") {
             //si uno de los valores del checkbox no es válido, la validación devuelve false
             foreach ($this->valor as $val) {
-                if (!(in_array($val, $this->arr)))
+                //si el valor está vacío y puede estar vacío
+                if (($this->valor == null || $this->valor == "") && ($this->null == Atipo::NULL_SI)) {
+                    $esValido = true;
+                }else{
+                    if (!(in_array($val, $this->arr)))
                     $esValido = false;
+                }
             }
             $esValido ? $this->error = "" : $this->error = "¡No modifiques los valores del checkbox!";
         //si es radio/select
         }else{
            //radio devuelve un único String, comprobamos que ese String devuelto esté en el array con el que se inicializó
-            if (in_array($this->valor, $this->arr)) {
+           //si puede ser null/vacío o el valor se encuentra en el array, devuelveme TRUE
+            if ((($this->valor == null || $this->valor == "") && ($this->null == Atipo::NULL_SI)) || in_array($this->valor, $this->arr)) {
                 $esValido = true;
                 $this->error = "";
             }else{

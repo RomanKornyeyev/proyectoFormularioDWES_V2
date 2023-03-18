@@ -4,14 +4,20 @@ namespace form\campo;
 
 abstract class Atipo
 {    
+    protected $null; //¿El campo puede estar vacío?
     protected $valor; //valor del campo enviado
     protected $name; //name en HTML
     protected $label; //texto del label
     protected $error; //error personalizado por cada campo
     protected $claseWrapper = array(); //clases CSS personalizada para el div que envuelve el input+label+error
     protected $claseInput = array(); //clases CSS personalizada para el input
+    
 
-    public function __construct($valor = "", $name = "", $label = "", $claseWrapper = array("input-wrapper"), $claseInput = array("input")) {
+    public const NULL_SI = 1;
+    public const NULL_NO = 0;
+
+    public function __construct($null = self::NULL_NO, $valor = "", $name = "", $label = "", $claseWrapper = array("input-wrapper"), $claseInput = array("input")) {
+        $this->null = $null;
         $this->valor = $valor;
         $this->name = $name;
         $this->label = $label;
@@ -25,10 +31,12 @@ abstract class Atipo
     public function getClaseWrapper() { return $this->claseWrapper;}
 
     //devuelve true si el valor no es nulo ni está vacío + validaciones específicas de cada tipo
-    public function validar(){        
-        if ($this->valor != "" && $this->valor != null) {
+    public function validar(){    
+        //si el campo no está vacío o PUEDE SER NULL/VACÍO
+        if (($this->valor != "" && $this->valor != null) || ($this->null == self::NULL_SI)) {
             return $this->validarEspecifico();
-        } else {
+        //si el campo no está vacío y NO PUEDE SER NULL/VACÍO
+        } else{
             $this->error = "El campo $this->name no puede estar vacío<br>";
             return false;
         }

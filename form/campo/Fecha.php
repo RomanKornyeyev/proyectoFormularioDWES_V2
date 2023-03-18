@@ -11,8 +11,8 @@ class Fecha extends Atipo
     public const NOW = "now";
     public const PLUS_ONE_WEEK = "+1 week";
 
-    public function __construct($valor, $name, $label, $claseWrapper, $claseInput, $inicio = self::NOW, $fin = self::PLUS_ONE_WEEK){
-        parent::__construct($valor,$name,$label,$claseWrapper,$claseInput);
+    public function __construct($null, $valor, $name, $label, $claseWrapper, $claseInput, $inicio = self::NOW, $fin = self::PLUS_ONE_WEEK){
+        parent::__construct($null,$valor,$name,$label,$claseWrapper,$claseInput);
         $this->inicio = strtotime($inicio);
         $this->fin = strtotime($fin);
     }

@@ -16,8 +16,8 @@ class Texto extends Atipo
     public const TYPE_TAREA = "textarea";
     public const TYPE_PSWD = "password";
 
-    public function __construct($valor, $name, $label, $claseWrapper, $claseInput, $tipo = self::TYPE_TEXT, $placeholder, $patron = self::DEFAULT_PATTERN_25){
-        parent::__construct($valor,$name,$label,$claseWrapper,$claseInput);
+    public function __construct($null,$valor, $name, $label, $claseWrapper, $claseInput, $tipo = self::TYPE_TEXT, $placeholder, $patron = self::DEFAULT_PATTERN_25){
+        parent::__construct($null,$valor,$name,$label,$claseWrapper,$claseInput);
         $this->tipo = $tipo;
         $this->placeholder = $placeholder;
         $this->patron = $patron;
@@ -26,7 +26,8 @@ class Texto extends Atipo
     function validarEspecifico(){
         //si el valor (texto introducido por el user) limpiado con cleanData coincide con el patrón, devuelve true
         //en caso contrario, devuelve false y carga error con el mensaje personalizado
-        if (preg_match($this->patron, $this->cleanData($this->valor))){
+        //si está vacío y puede estarlo, devuelveme true
+        if (preg_match($this->patron, $this->cleanData($this->valor)) || (($this->valor == null || $this->valor == "") && ($this->null == Atipo::NULL_SI))){
             return true;
         }else {
             $longitud = ($this->tipo == self::TYPE_TAREA)? 500 : 25;

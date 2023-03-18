@@ -16,15 +16,16 @@ class Numero extends Atipo {
     public const MAX_10=10;
     public const MAX_15=15;
 
-    public function __construct($valor,$name,$label,$claseWrapper,$claseInput,$tipo=self::TYPE_NUMBER,$min=self::MIN_DEFAULT_0,$max=self::MAX_10) {
-        parent::__construct($valor,$name,$label,$claseWrapper,$claseInput);
+    public function __construct($null,$valor,$name,$label,$claseWrapper,$claseInput,$tipo=self::TYPE_NUMBER,$min=self::MIN_DEFAULT_0,$max=self::MAX_10) {
+        parent::__construct($null,$valor,$name,$label,$claseWrapper,$claseInput);
         $this->tipo = $tipo;
         $this->min = $min;
         $this->max = $max;
     }
 
     function validarEspecifico () {
-        if ($this->valor>=$this->min && $this->valor<=$this->max){
+        //si el valor está en el rango permitido o si el valor es null/vacío y puede ser null/vacío, validamelo
+        if (($this->valor>=$this->min && $this->valor<=$this->max) || ($this->null == Atipo::NULL_SI && ($this->valor == "" || $this->valor == null))){
             return true;
         }else{
             $this->error="Fuera del rango permitido, debe estar entre $this->min y $this->max (ambos incluidos).";
