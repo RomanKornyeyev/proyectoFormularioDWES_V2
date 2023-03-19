@@ -76,22 +76,22 @@ use form\claseMain\Formulario;
 Una vez hecho esto y siguiendo en <b>index.php</b>. Podremos instanciar un nuevo formulario, con TODOS los campos que queramos:
 ```php
 // ================================= INICIALIZACIÓN DEL FORM =================================
-//                             ACTION            METHOD           clases-css-form  CAMPOS
-$formulario = new Formulario("index.php", Formulario::METHOD_POST, ["formulario"], array(
+//                             ACTION            METHOD           clases-css-form   ¿Vaciar al validar?   CAMPOS
+$formulario = new Formulario("index.php", Formulario::METHOD_POST, ["formulario"], Formulario::VACIAR_NO, array(
     //                         ====================================== COMÚN ======================================  //  ======================== ESPECÍFICO ========================
     //                     ¿Puede estar vacío?  valor    name            label      clases-css-wrapper  clases-css-input      tipoCampo       placeholder         regex
-    $nombre = new Texto        (Atipo::NULL_SI, null, "nombre",       "Nombre",    ["input-wrapper"],  ["input"],         Texto::TYPE_TEXT, "Tu nombre...",  Texto::DEFAULT_PATTERN_25),
-    $pass = new Texto          (Atipo::NULL_SI, null, "contraseña",   "Password",  ["input-wrapper"],  ["input"],         Texto::TYPE_PSWD, "Tu contra...",  Texto::DEFAULT_PATTERN_25),
-    $descripcion = new Texto   (Atipo::NULL_SI, null, "descripcion",  "Descrip",   ["input-wrapper"],  ["input"],         Texto::TYPE_TAREA,"La desc...",    Texto::DEFAULT_PATTERN_500),
+    $nombre = new Texto        (Atipo::NULL_NO, null, "nombre",       "Nombre",    ["input-wrapper"],  ["input"],         Texto::TYPE_TEXT, "Tu nombre...",  Texto::DEFAULT_PATTERN_25),
+    $pass = new Texto          (Atipo::NULL_NO, null, "contraseña",   "Password",  ["input-wrapper"],  ["input"],         Texto::TYPE_PSWD, "Tu contra...",  Texto::DEFAULT_PATTERN_25),
+    $descripcion = new Texto   (Atipo::NULL_NO, null, "descripcion",  "Descrip",   ["input-wrapper"],  ["input"],         Texto::TYPE_TAREA,"La desc...",    Texto::DEFAULT_PATTERN_500),
     //                                                                                                                        tipoCampo            min                     max
-    $valoracion = new Numero   (Atipo::NULL_SI, null, "valoracion", "Valoracion",  ["input-wrapper"],  ["input"],         Numero::TYPE_RANGE, Numero::MIN_DEFAULT_0, Numero::MAX_10),
-    $vecesVista = new Numero   (Atipo::NULL_SI, null, "vistas",   "¿Veces vista?", ["input-wrapper"],  ["input"],         Numero::TYPE_NUMBER, Numero::MIN_DEFAULT_0, Numero::MAX_10),
+    $valoracion = new Numero   (Atipo::NULL_NO, null, "valoracion", "Valoracion",  ["input-wrapper"],  ["input"],         Numero::TYPE_RANGE, Numero::MIN_DEFAULT_0, Numero::MAX_10),
+    $vecesVista = new Numero   (Atipo::NULL_NO, null, "vistas",   "¿Veces vista?", ["input-wrapper"],  ["input"],         Numero::TYPE_NUMBER, Numero::MIN_DEFAULT_0, Numero::MAX_10),
     //                                                                                                                  clase-wrapper(chboxes)     tipoCampo                     array (checkboxes, radios, selects)                                               
     $generos = new Multiple    (Atipo::NULL_SI, null, "generos",     "¿Géneros?",  ["input-wrapper"],  [""],              ["input-multiple"], Multiple::TYPE_CHECKBOX, ["Comedia", "Terror", "Misterio", "Suspense", "Acción", "Otros"]),
-    $emision = new Multiple    (Atipo::NULL_SI, null, "emision",   "¿En emisión?", ["input-wrapper"],  [""],              ["input-multiple"], Multiple::TYPE_RADIO,    ["Sí", "No"]),
-    $plataforma = new Multiple (Atipo::NULL_SI, null, "plataforma","¿Plataforma?", ["input-wrapper"],  [""],              ["input-multiple"], Multiple::TYPE_SELECT,   ["Netflix","HBO","Piratilla","Otros"]),
+    $emision = new Multiple    (Atipo::NULL_NO, null, "emision",   "¿En emisión?", ["input-wrapper"],  [""],              ["input-multiple"], Multiple::TYPE_RADIO,    ["Sí", "No"]),
+    $plataforma = new Multiple (Atipo::NULL_NO, null, "plataforma","¿Plataforma?", ["input-wrapper"],  [""],              ["input-multiple"], Multiple::TYPE_SELECT,   ["Netflix","HBO","Piratilla","Otros"]),
     //                                                                                                                       f_ini             f_fin
-    $fecha = new Fecha         (Atipo::NULL_SI, null, "fecha",        "Fecha",     ["input-wrapper"],  ["input"],         Fecha::NOW, Fecha::PLUS_ONE_WEEK)
+    $fecha = new Fecha         (Atipo::NULL_NO, null, "fecha",        "Fecha",     ["input-wrapper"],  ["input"],         Fecha::NOW, Fecha::PLUS_ONE_WEEK)
 // === SUBMIT ===
 // claseWrappSubmit  idSubmit  nameSubm  txtSubmit  clseSubmit
 ), ["input-wrapper"], "enviar", "enviar", "ENVIAR", ["input"]);
@@ -113,7 +113,7 @@ La estructura generada del formulario será la siguiente (obviamente aplicándol
 <br>
 
 Bien, ya tenemos instanciado nuestro formulario. Y tenemos 3 acciones principales:
-1. <b>Pintar todo el formulario</b> (lo cual meteremos dentro del HTML/template). Esta función nos pinta el formulario con todos los campos y conserva los datos en caso de error y vacía los campos si se ha submiteado y se han validado todos los inputs:
+1. <b>Pintar todo el formulario</b> (lo cual meteremos dentro del HTML/template). Esta función nos pinta el formulario con todos los campos y conserva los datos en caso de error y vacía (o no, a elección) los datos una vez que todo el formulario ha sido validado:
     ```php
     //pintar global lleva implicito los errores personalizados
     <?php $formulario->pintarGlobal(); ?>

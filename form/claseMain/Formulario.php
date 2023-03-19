@@ -10,6 +10,7 @@ class Formulario
     private $methodGlobal; //ARRAY de $_GET o $_POST (según method), OJO, ES EL ARRAY de $_GET/$_POST, NO EL MÉTODO QUE SE UTILIZA
     private $claseForm = array(); //ARRAY de clases (css) del form
     private $campos = array(); //ARRAY de campos
+    private $vaciar;
 
     private $claseSubmitWrapper = array();
     private $idSubmit;
@@ -20,10 +21,14 @@ class Formulario
     public const METHOD_POST = "post";
     public const METHOD_GET = "get";
 
+    public const VACIAR_SI = 1;
+    public const VACIAR_NO = 0;
+
     public function __construct(
         $action = ".",
         $method = self::METHOD_POST,
         $claseForm = array("formulario"),
+        $vaciar = self::VACIAR_SI,
         $campos = array(),
         $claseSubmitWrapper = array(""),
         $idSubmit = "",
@@ -33,19 +38,20 @@ class Formulario
     {
         $this->action = $action;
         $this->method = $method;
-        $this->claseForm = $claseForm;
         $this->methodGlobal = ($this->method == self::METHOD_GET)? $_GET : $_POST;
+        $this->claseForm = $claseForm;
+        $this->vaciar = $vaciar;
+
+        foreach ($campos as $campo) {
+            (isset($this->methodGlobal[$campo->getName()]))? $campo->setValor($this->methodGlobal[$campo->getName()]) : $campo->setValor(null);
+            array_push($this->campos, $campo);
+        }
 
         $this->claseSubmitWrapper = $claseSubmitWrapper;
         $this->idSubmit = $idSubmit;
         $this->nameSubmit = $nameSubmit;
         $this->valorSubmit = $valorSubmit;
         $this->claseSubmitInput = $claseSubmitInput;
-
-        foreach ($campos as $campo) {
-            (isset($this->methodGlobal[$campo->getName()]))? $campo->setValor($this->methodGlobal[$campo->getName()]) : $campo->setValor(null);
-            array_push($this->campos, $campo);
-        }
     }
 
     public function getMethodGlobal() { return $this->methodGlobal; }
@@ -54,11 +60,14 @@ class Formulario
         //validamos para cargar la variable error y printearla
         $this->validarGlobal();
 
-        //vaciado de campos si están validados, útil si queremos insertar más entradas en una misma página
-        if ($this->validarGlobal()) {
-            $this->vaciarCampos();
+        //si está solicitado
+        if ($this->vaciar == self::VACIAR_SI) {
+            //vaciado de campos si están validados, útil si queremos insertar más entradas en una misma página
+            if ($this->validarGlobal()) {
+                $this->vaciarCampos();
+            }
         }
-
+        
         //printeo del formulario
         echo "<form action='$this->action' method='$this->method' class='".implode(" ", $this->claseForm)."'>\n";
         foreach ($this->campos as $campo) {
@@ -89,22 +98,9 @@ class Formulario
     }
 
     public function vaciarCampos(){
-        // --- VACIADO CON JS (LEGACY) xd me creo guay por poner legacy en vez de antiguo ---
-        //IMP: solo sirve para texto y numeros. No va para multiple y fecha, de momento no es necesario
-        //si el form está validad, vacía los campos
-        // if($this->validarGlobal()){
-        //     echo "<script>";
-        //     foreach ($this->campos as $campo) {
-        //         echo "document.getElementById('".$campo->getName()."').value='';";
-        //     }
-        //     echo "</script>";
-        // }
-        if($this->validarGlobal()){
-            foreach ($this->campos as $campo) {
-                $campo->setValor("");
-            }
+        foreach ($this->campos as $campo) {
+            $campo->setValor("");
         }
-        
     }
 }
 
