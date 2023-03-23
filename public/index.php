@@ -6,12 +6,13 @@ use form\campo\Fecha;
 use form\campo\Multiple;
 use form\campo\Numero;
 use form\campo\Texto;
+use form\campo\File;
 use form\claseMain\Formulario;
 
 
 // ================================= INICIALIZACIÓN DEL FORM =================================
-//                             ACTION            METHOD           clases-css-form   ¿Vaciar al validar?   CAMPOS
-$formulario = new Formulario("index.php", Formulario::METHOD_POST, ["formulario"], Formulario::VACIAR_NO, array(
+//                             ACTION            METHOD           clases-css-form   ¿Vaciar al validar?   atr-extra(para forms con img)   CAMPOS
+$formulario = new Formulario("index.php", Formulario::METHOD_POST, ["formulario"], Formulario::VACIAR_NO, Formulario::ATR_IMG,            array(
     //                         ====================================== COMÚN ======================================  //  ======================== ESPECÍFICO ========================
     //                     ¿Puede estar vacío?  valor    name            label    clases-css-wrapper  clases-css-input   tipoCampo       placeholder         regex
     $nombre = new Texto        (Atipo::NULL_NO, null, "nombre",       "Nombre",    ["input-wrapper"],  ["input"],       Texto::TYPE_TEXT, "Tu nombre...",  Texto::DEFAULT_PATTERN_25),
@@ -25,7 +26,9 @@ $formulario = new Formulario("index.php", Formulario::METHOD_POST, ["formulario"
     $emision = new Multiple    (Atipo::NULL_NO, null, "emision",   "¿En emisión?", ["input-wrapper"],  [""],            ["input-multiple"], Multiple::TYPE_RADIO,    ["Sí", "No"]),
     $plataforma = new Multiple (Atipo::NULL_NO, null, "plataforma","¿Plataforma?", ["input-wrapper"],  [""],            ["input-multiple"], Multiple::TYPE_SELECT,   ["Netflix","HBO","Piratilla","Otros"]),
     //                                                                                                                     f_ini             f_fin
-    $fecha = new Fecha         (Atipo::NULL_NO, null, "fecha",        "Fecha",     ["input-wrapper"],  ["input"],       Fecha::NOW, Fecha::PLUS_ONE_WEEK)
+    $fecha = new Fecha         (Atipo::NULL_NO, null, "fecha",        "Fecha",     ["input-wrapper"],  ["input"],       Fecha::NOW, Fecha::PLUS_ONE_WEEK),
+    //                                                                                                                  imgWrp  clsImg  fileWrp    imgDflt            accept           max size         ruta guardado
+    $img = new File            (Atipo::NULL_SI, null, "img",         "Imagen",     ["input-wrapper"],  ["input"],       [""],   [""],   [""],  File::IMG_DEFAULT, File::ACCEPT_BOTH, File::SIZE_LOW, File::RUTA_PERFIL."1.png")
 // === SUBMIT ===
 // claseWrappSubmit  idSubmit  nameSubm  txtSubmit  clseSubmit
 ), ["input-wrapper"], "enviar", "enviar", "ENVIAR", ["input"]);

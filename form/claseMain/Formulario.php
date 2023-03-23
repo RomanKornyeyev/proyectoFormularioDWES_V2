@@ -4,14 +4,16 @@ namespace form\claseMain;
 
 class Formulario
 {
-
+    //action, campos, etc.
     private $action; //action (ej: index.php)
     private $method; //método de envío (get o post)
     private $methodGlobal; //ARRAY de $_GET o $_POST (según method), OJO, ES EL ARRAY de $_GET/$_POST, NO EL MÉTODO QUE SE UTILIZA
     private $claseForm = array(); //ARRAY de clases (css) del form
-    private $campos = array(); //ARRAY de campos
     private $vaciar;
-
+    private $atr;
+    private $campos = array(); //ARRAY de campos
+    
+    //submit
     private $claseSubmitWrapper = array();
     private $idSubmit;
     private $nameSubmit;
@@ -24,11 +26,15 @@ class Formulario
     public const VACIAR_SI = 1;
     public const VACIAR_NO = 0;
 
+    public const ATR_IMG = "enctype='multipart/form-data'";
+
     public function __construct(
         $action = ".",
         $method = self::METHOD_POST,
+        //methodGlobal va auto (respecto al method)
         $claseForm = array("formulario"),
         $vaciar = self::VACIAR_SI,
+        $atr = "",
         $campos = array(),
         $claseSubmitWrapper = array(""),
         $idSubmit = "",
@@ -41,6 +47,7 @@ class Formulario
         $this->methodGlobal = ($this->method == self::METHOD_GET)? $_GET : $_POST;
         $this->claseForm = $claseForm;
         $this->vaciar = $vaciar;
+        $this->atr = $atr;
 
         foreach ($campos as $campo) {
             (isset($this->methodGlobal[$campo->getName()]))? $campo->setValor($this->methodGlobal[$campo->getName()]) : $campo->setValor(null);
@@ -67,9 +74,14 @@ class Formulario
                 $this->vaciarCampos();
             }
         }
+
+        //guarda imgs si valida
+        if ($this->validarGlobal()) {
+            $this->guardarArchivos();
+        }
         
         //printeo del formulario
-        echo "<form action='$this->action' method='$this->method' class='".implode(" ", $this->claseForm)."'>\n";
+        echo "<form action='$this->action' method='$this->method' class='".implode(" ", $this->claseForm)."' $this->atr>\n";
         foreach ($this->campos as $campo) {
             echo "<div class='".implode(" ", $campo->getClaseWrapper())."'>\n";
             $campo->pintar(); //output: <input>
@@ -100,6 +112,14 @@ class Formulario
     public function vaciarCampos(){
         foreach ($this->campos as $campo) {
             $campo->setValor("");
+        }
+    }
+
+    public function guardarArchivos(){
+        foreach ($this->campos as $campo) {
+            if (isset($_FILES[$campo->getName()])) {
+                move_uploaded_file($_FILES[$campo->getName()]['tmp_name'], $campo->getRuta());
+            }
         }
     }
 }
