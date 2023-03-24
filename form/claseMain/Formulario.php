@@ -50,7 +50,7 @@ class Formulario
         $this->atr = $atr;
 
         foreach ($campos as $campo) {
-            (isset($this->methodGlobal[$campo->getName()]))? $campo->setValor($this->methodGlobal[$campo->getName()]) : $campo->setValor(null);
+            (isset($this->methodGlobal[$campo->getName()]))? $campo->setValor($this->methodGlobal[$campo->getName()]) : $campo->setValor($campo->getValor());
             array_push($this->campos, $campo);
         }
 
@@ -76,9 +76,9 @@ class Formulario
         }
 
         //guarda imgs si valida
-        if ($this->validarGlobal()) {
-            $this->guardarArchivos();
-        }
+        // if ($this->validarGlobal()) {
+        //     $this->guardarArchivos();
+        // }
         
         //printeo del formulario
         echo "<form action='$this->action' method='$this->method' class='".implode(" ", $this->claseForm)."' $this->atr>\n";
@@ -115,13 +115,13 @@ class Formulario
         }
     }
 
-    public function guardarArchivos(){
-        foreach ($this->campos as $campo) {
-            if (isset($_FILES[$campo->getName()])) {
-                move_uploaded_file($_FILES[$campo->getName()]['tmp_name'], $campo->getRuta());
-            }
-        }
-    }
+    // public function guardarArchivos(){
+    //     foreach ($this->campos as $campo) {
+    //         if (isset($_FILES[$campo->getName()])) {
+    //             move_uploaded_file($_FILES[$campo->getName()]['tmp_name'], $campo->getRuta());
+    //         }
+    //     }
+    // }
 }
 
 

@@ -1,6 +1,7 @@
 <?php
     echo "".implode("<br>", $_POST);
     echo "<br>";
+    $_FILES['imagen']['full_path'] = "gazpacho2.jpg";
     echo "".$_FILES['imagen']['size'];
     if (isset($_FILES['imagen'])) {
         echo "SI, ESTÁ SETEADA<br>";

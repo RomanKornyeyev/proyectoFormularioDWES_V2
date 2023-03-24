@@ -15,23 +15,30 @@ use form\claseMain\Formulario;
 $formulario = new Formulario("index.php", Formulario::METHOD_POST, ["formulario"], Formulario::VACIAR_NO, Formulario::ATR_IMG,            array(
     //                         ====================================== COMÚN ======================================  //  ======================== ESPECÍFICO ========================
     //                     ¿Puede estar vacío?  valor    name            label    clases-css-wrapper  clases-css-input   tipoCampo       placeholder         regex
-    $nombre = new Texto        (Atipo::NULL_NO, null, "nombre",       "Nombre",    ["input-wrapper"],  ["input"],       Texto::TYPE_TEXT, "Tu nombre...",  Texto::DEFAULT_PATTERN_25),
-    $pass = new Texto          (Atipo::NULL_NO, null, "contraseña",   "Password",  ["input-wrapper"],  ["input"],       Texto::TYPE_PSWD, "Tu contra...",  Texto::DEFAULT_PATTERN_25),
-    $descripcion = new Texto   (Atipo::NULL_NO, null, "descripcion",  "Descrip",   ["input-wrapper"],  ["input"],       Texto::TYPE_TAREA,"La desc...",    Texto::DEFAULT_PATTERN_500),
+    $nombre = new Texto        (Atipo::NULL_SI, null, "nombre",       "Nombre",    ["input-wrapper"],  ["input"],       Texto::TYPE_TEXT, "Tu nombre...",  Texto::DEFAULT_PATTERN_25),
+    $pass = new Texto          (Atipo::NULL_SI, null, "contraseña",   "Password",  ["input-wrapper"],  ["input"],       Texto::TYPE_PSWD, "Tu contra...",  Texto::DEFAULT_PATTERN_25),
+    $descripcion = new Texto   (Atipo::NULL_SI, null, "descripcion",  "Descrip",   ["input-wrapper"],  ["input"],       Texto::TYPE_TAREA,"La desc...",    Texto::DEFAULT_PATTERN_500),
     //                                                                                                                      tipoCampo            min                     max
-    $valoracion = new Numero   (Atipo::NULL_NO, null, "valoracion", "Valoracion",  ["input-wrapper"],  ["input"],       Numero::TYPE_RANGE, Numero::MIN_DEFAULT_0, Numero::MAX_10),
-    $vecesVista = new Numero   (Atipo::NULL_NO, null, "vistas",   "¿Veces vista?", ["input-wrapper"],  ["input"],       Numero::TYPE_NUMBER, Numero::MIN_DEFAULT_0, Numero::MAX_10),
+    $valoracion = new Numero   (Atipo::NULL_SI, null, "valoracion", "Valoracion",  ["input-wrapper"],  ["input"],       Numero::TYPE_RANGE, Numero::MIN_DEFAULT_0, Numero::MAX_10),
+    $vecesVista = new Numero   (Atipo::NULL_SI, null, "vistas",   "¿Veces vista?", ["input-wrapper"],  ["input"],       Numero::TYPE_NUMBER, Numero::MIN_DEFAULT_0, Numero::MAX_10),
     //                                                                                                                clase-wrapper(chboxes)     tipoCampo                     array (checkboxes, radios, selects)                                               
     $generos = new Multiple    (Atipo::NULL_SI, null, "generos",     "¿Géneros?",  ["input-wrapper"],  [""],            ["input-multiple"], Multiple::TYPE_CHECKBOX, ["Comedia", "Terror", "Misterio", "Suspense", "Acción", "Otros"]),
-    $emision = new Multiple    (Atipo::NULL_NO, null, "emision",   "¿En emisión?", ["input-wrapper"],  [""],            ["input-multiple"], Multiple::TYPE_RADIO,    ["Sí", "No"]),
-    $plataforma = new Multiple (Atipo::NULL_NO, null, "plataforma","¿Plataforma?", ["input-wrapper"],  [""],            ["input-multiple"], Multiple::TYPE_SELECT,   ["Netflix","HBO","Piratilla","Otros"]),
+    $emision = new Multiple    (Atipo::NULL_SI, null, "emision",   "¿En emisión?", ["input-wrapper"],  [""],            ["input-multiple"], Multiple::TYPE_RADIO,    ["Sí", "No"]),
+    $plataforma = new Multiple (Atipo::NULL_SI, null, "plataforma","¿Plataforma?", ["input-wrapper"],  [""],            ["input-multiple"], Multiple::TYPE_SELECT,   ["Netflix","HBO","Piratilla","Otros"]),
     //                                                                                                                     f_ini             f_fin
-    $fecha = new Fecha         (Atipo::NULL_NO, null, "fecha",        "Fecha",     ["input-wrapper"],  ["input"],       Fecha::NOW, Fecha::PLUS_ONE_WEEK),
+    $fecha = new Fecha         (Atipo::NULL_SI, null, "fecha",        "Fecha",     ["input-wrapper"],  ["input"],       Fecha::NOW, Fecha::PLUS_ONE_WEEK),
     //                                                                                                                  imgWrp  clsImg  fileWrp    imgDflt            accept           max size         ruta guardado
-    $img = new File            (Atipo::NULL_SI, null, "img",         "Imagen",     ["input-wrapper"],  ["input"],       [""],   [""],   [""],  File::IMG_DEFAULT, File::ACCEPT_BOTH, File::SIZE_LOW, File::RUTA_PERFIL."1.png")
+    $img = new File            (Atipo::NULL_SI, null, "img",         "Imagen",     ["input-wrapper"],  ["input"],       [""],   [""],   [""],  File::IMG_DEFAULT, File::ACCEPT_BOTH, File::SIZE_LOW, File::RUTA_PERFIL)
 // === SUBMIT ===
 // claseWrappSubmit  idSubmit  nameSubm  txtSubmit  clseSubmit
 ), ["input-wrapper"], "enviar", "enviar", "ENVIAR", ["input"]);
+
+//guardado img (esta variable vendría de una BD, ej: id_user)
+$variable = 1;
+if ($formulario->validarGlobal()) {
+    // mueve el archivo/img del campo name=img a:               ruta          nombre    ext
+    move_uploaded_file($_FILES[$img->getName()]['tmp_name'], $img->getRuta().$variable.".png");
+}
 
 ?>
 <!DOCTYPE html>
