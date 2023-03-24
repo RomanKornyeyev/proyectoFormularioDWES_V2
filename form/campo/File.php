@@ -56,11 +56,13 @@ class File extends Atipo {
 
     function validarEspecifico () {
         if (
-            ($_FILES[$this->name]["type"] == (self::ACCEPT_PNG || self::ACCEPT_JPG))
+            (($_FILES[$this->name]["type"] == (self::ACCEPT_PNG || self::ACCEPT_JPG))
             &&
             ($_FILES[$this->name]["size"] <= $this->size)
             &&
-            ($_FILES[$this->name]['error'] == 0)
+            ($_FILES[$this->name]['error'] == 0))
+            ||
+            ($this->null == Atipo::NULL_SI && ($this->valor == "" || $this->valor == null))
             ) {
             return true;
         }else{
